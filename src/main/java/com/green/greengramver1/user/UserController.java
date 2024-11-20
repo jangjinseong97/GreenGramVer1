@@ -6,10 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,9 +19,16 @@ public class UserController {
 
     @PostMapping("sign-up")
     @Operation(summary = "회원 가입")
-    public ResultResponse<Integer> signUp(@RequestBody UserInsReq p){
-        int result = 0;
-        return ResultResponse.<Integer>builder() .resultMessage("회원가입 완료")
+    public ResultResponse<Integer> signUp(@RequestPart UserInsReq p
+                                        , @RequestPart MultipartFile pic){
+        // 파일 업로드시 RequestBody 사용 불가능
+        // RequestPart 를 사용해야 된다.
+        // MultipartFile 은 파일을 받아오는것
+        // 따라서 위의 경우는 파일+데이터가 넘어와서 RequestPart 사용
+        // 파일이 여러개라면 당연히 List<MultipartFile> 로 pic을 받으면 됨
+        log.info("userins: {},file: {}", p, pic.getOriginalFilename());
+        int result = service.postSignUp(pic, p);
+        return ResultResponse.<Integer>builder().resultMessage("회원가입 완료")
                 .resultData(result).build();
     }
 }

@@ -6,6 +6,10 @@ spring:
     username: root
     password: green502
 
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
 mybatis:
   mapper-locations: xml/**/*.xml
 
@@ -15,3 +19,9 @@ springdoc:
     default-models-expand-depth: -1
     operations-sorter: method
     path: /swagger
+  cache:
+    disabled: true
+
+# custom property 내가 만든 속성 ( 절대경로 Absolute Path(URL))
+file:
+  directory: D:\Students\jang jin seong\download\greengram_ver1

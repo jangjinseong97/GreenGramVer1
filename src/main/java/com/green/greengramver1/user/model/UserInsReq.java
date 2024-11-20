@@ -1,13 +1,25 @@
 package com.green.greengramver1.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@AllArgsConstructor
+@Setter
+@ToString
 public class UserInsReq {
+    @Schema(description = "아이디", requiredMode = Schema.RequiredMode.REQUIRED)
     private String uid;
+    @Schema(description = "비밀번호", requiredMode = Schema.RequiredMode.REQUIRED)
     private String upw;
+    @Schema(description = "닉네임")
     private String nickName;
+    @JsonIgnore
     private String pic;
+    @JsonIgnore
+    private long userId;
+    //
 }
