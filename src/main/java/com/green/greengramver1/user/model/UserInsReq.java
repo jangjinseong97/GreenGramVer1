@@ -21,5 +21,5 @@ public class UserInsReq {
     private String pic;
     @JsonIgnore
     private long userId;
-    //
+    //xml 에 작성한 keyProperty="userId"로 인하여 값을 받아오기 위해
 }
