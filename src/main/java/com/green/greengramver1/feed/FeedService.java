@@ -70,8 +70,6 @@ public class FeedService {
             mapper.insFeedPic(feedPicDto);
         }
 
-
-
         return res;
     }
 }
