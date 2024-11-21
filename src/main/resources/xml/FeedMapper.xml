@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.greengramver1.feed.FeedMapper">
+    <insert id="insFeed" useGeneratedKeys="true" keyProperty="feedId">
+        INSERT INTO feed
+        set writer_user_id = #{writerUserId},
+        <!-- writer_user_id는 fk값인데 외부에서 알고 그값을 주는게 맞아?
+         에바인게 맞음 지금은 야메로 하는중이라 어쩔수 없이 fk로 하는 것 -->
+            contents = #{contents},
+            location = #{location}
+    </insert>
+    <insert id="insFeedPic">
+        INSERT INTO feed_pics
+            set feed_id = #{feedId}
+                , pic = #{pic}
+    </insert>
+</mapper>

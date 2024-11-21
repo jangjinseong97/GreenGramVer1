@@ -19,6 +19,7 @@ public class MyFileUtils {
     private final String uploadPath;
 
     public MyFileUtils(@Value("${file.directory}") String uploadPath) {
+        // yaml에서 설정한 경로를 uploadPath에 넣어주는것
         log.info("MFU 생성자: {}", uploadPath);
         this.uploadPath = uploadPath;
     }
@@ -55,6 +56,7 @@ public class MyFileUtils {
     //파일을 원하는 경로에 저장
     public void transferTo(MultipartFile mf, String path) throws IOException{
         File file = new File(uploadPath, path);
+        // File 클래스와 new File 로 생성자를 이용하여 uploadPath와 Path 로 나눠진 경로를 합쳐줌
         mf.transferTo(file); // MultipartFile 의 메소드
     }
 }

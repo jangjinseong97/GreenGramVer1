@@ -1,7 +1,9 @@
 package com.green.greengramver1.user;
 
 import com.green.greengramver1.common.MyFileUtils;
-import com.green.greengramver1.user.model.UserInsReq;
+import com.green.greengramver1.user.model.UserSignInReq;
+import com.green.greengramver1.user.model.UserSignInRes;
+import com.green.greengramver1.user.model.UserSignUpReq;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
@@ -16,7 +18,7 @@ import java.io.IOException;
 public class UserService {
     private final UserMapper mapper;
     private final MyFileUtils myFileUtils;
-    public int postSignUp(MultipartFile pic, UserInsReq p){
+    public int postSignUp(MultipartFile pic, UserSignUpReq p){
 //        String savedPicName = myFileUtils.makeRandomFileName(pic.getOriginalFilename());
 //        String savedPicName = myFileUtils.makeRandomFileName(pic);
         // pic는 MultipartFile 이걸 string 으로 변환 해야되는건가?
@@ -64,5 +66,23 @@ public class UserService {
         }
         return res;
 
+    }
+    public UserSignInRes postSignIn(UserSignInReq p){
+
+        UserSignInRes res = mapper.selUserForSignIn(p);
+        if(res == null){
+            // where 절에서 uid로 비교했기에 null값이 넘어왔다면 튜플이 없었다는 뜻
+            // 즉 아이디가 없다는 의미
+            res.setMessage("아이디를 확인해 주세요");
+            return res;
+        }
+        if(!BCrypt.checkpw(p.getUpw(),res.getUpw())){
+            res = new UserSignInRes();
+            res.setMessage("비밀번호가 틀립니다.");
+            return res;
+        }
+            //
+        res.setMessage("로그인 성공");
+        return res;
     }
 }
