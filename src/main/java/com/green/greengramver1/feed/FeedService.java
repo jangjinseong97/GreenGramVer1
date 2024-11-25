@@ -71,8 +71,17 @@ public class FeedService {
         return res;
     }
     public List<FeedGetRes> getFeedList(FeedGetReq p){
-//        List<FeedGetRes> list = mapper.selFeedList(p);
-//        return list;
-        return mapper.selFeedList(p);
+        List<FeedGetRes> list = mapper.selFeedList(p);
+        // feedId를 가지기 위하여 여기선 feedId 가 순서대로 나옴(최신순)
+
+        for(FeedGetRes r : list){
+            List<String> listPics = mapper.selFeedPicList(r.getFeedId());
+            // 위에서 list에서의 feedId를 사용하여 selFeedPicList 쿼리문 실행(where에서 쓰임)
+            r.setPics(listPics);
+            // r.setPics 로 FeedGetRes 객체에 리스트를 저장(List<String pics)에
+        }
+
+        return list;
+//        return mapper.selFeedList(p);
     }
 }

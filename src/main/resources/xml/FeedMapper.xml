@@ -26,4 +26,9 @@
         ORDER BY feed_id DESC
         LIMIT #{sIdx}, #{size}
     </select>
+    <select id="selFeedPicList">
+        SELECT pic
+        FROM feed_pics
+        WHERE feed_id = #{feedId}
+    </select>
 </mapper>

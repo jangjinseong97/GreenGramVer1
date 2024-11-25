@@ -11,4 +11,5 @@ public interface FeedMapper {
     int insFeed(FeedPostReq p);
     int insFeedPic(FeedPicDto p);
     List<FeedGetRes> selFeedList(FeedGetReq p);
+    List<String> selFeedPicList(long p);
 }
