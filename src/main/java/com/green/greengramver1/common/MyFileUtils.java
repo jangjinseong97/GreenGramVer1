@@ -15,6 +15,7 @@ import java.util.UUID;
 @Component // 빈등록
 // 빈등록은 스프링컨테이너에가 객체등록을 맞김(new 작업을 스프링컨테이너에서 해주는것)
 // 싱글톤이라 하나만 만들어서 부를때마다 같은 주소값을 주는것
+// 아래의 MyFileUtils 에 @Value를 달아 yaml에 적어둔 경로를 DI 해주기 위해
 public class MyFileUtils {
     private final String uploadPath;
 
@@ -22,6 +23,7 @@ public class MyFileUtils {
         // yaml에서 설정한 경로를 uploadPath에 넣어주는것
         log.info("MFU 생성자: {}", uploadPath);
         this.uploadPath = uploadPath;
+        // 생성자는 특별히 생성시(new 선언할때)에만 호출
     }
     public String makeFolder(String path){
         File file = new File(uploadPath, path);

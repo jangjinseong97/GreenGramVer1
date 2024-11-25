@@ -23,7 +23,7 @@ public class UserController {
     @Operation(summary = "회원 가입")
     public ResultResponse<Integer> signUp(@RequestPart UserSignUpReq p
                                         , @RequestPart(required = false) MultipartFile pic){
-        // 파일 업로드시 Reques tBody 사용 불가능
+        // 파일 업로드시 RequestBody 사용 불가능
         // RequestPart 를 사용해야 된다.
         // MultipartFile 은 파일을 받아오는것
         // 따라서 위의 경우는 파일+데이터가 넘어와서 RequestPart 사용

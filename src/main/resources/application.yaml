@@ -23,6 +23,7 @@ springdoc:
     disabled: true
 
 # custom property 내가 만든 속성 ( 절대경로 Absolute Path(URL))
+# 주소값을 DI 해주기 위해 작성하는것
 file:
   directory: D:\Students\jang jin seong\download\greengram_ver1
 
