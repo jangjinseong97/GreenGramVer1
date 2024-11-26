@@ -31,6 +31,9 @@ public class Paging {
 
         this.page = (page == null || page < 1) ? 1 : page;
         this.size = (size == null || size <= 0) ? DEFAULT_PAGE_SIZE : size;
+
         this.sIdx = (this.page -1)*this.size;
+        // 여기서 this.page 와 this.size로 해주지 않으면 가장 위의 Integer 값으로 사용해서
+        // 위에서 값을 따로 지정해둔 것이 정상적으로 작동하지 않을 수 있음
     }
 }
